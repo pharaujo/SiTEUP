@@ -1,0 +1,85 @@
+<% form_for(@member) do |f| %>
+  <%= f.error_messages %>
+
+<%- unless @member.entity.new_record? %>
+<p>
+  <%= f.hidden_field :entity_id %>
+</p>
+<%- end %>
+
+<p>
+  <%= f.label :nickname, "Nickname" %>
+  <%= f.text_field :nickname %>
+</p>
+
+<p>
+  <%= f.label :student_number, "Student number" %>
+  <%= f.text_field :student_number %>
+</p>
+
+<p>
+  <%= f.label :nbi, "BI" %>
+  <%= f.text_field :nbi %>
+</p>
+
+<h2>
+  Entity info
+</h2>
+
+  <% f.fields_for :entity do |e| %>
+
+    <p>
+      <%= e.label :entity_type_id, "Entity type" %>
+      <%= e.collection_select :entity_type_id, EntityType.all, :id, :description %>
+    </p>
+
+    <p>
+      <%= e.label :name, "Name" %>
+      <%= e.text_field :name %>
+    </p>
+
+    <p>
+      <%= e.label :homepage, "Homepage" %>
+      <%= e.text_field :homepage %>
+    </p>
+
+    <p>
+      <%= e.label :nif, "NIF" %>
+      <%= e.text_field :nif %>
+    </p>
+
+    <h3>Telephones</h3>
+
+    <% e.fields_for :telephones do |telephone_form| %>
+      <%= render :partial => 'entities/telephone', :locals => { :f => telephone_form } %>
+    <% end %>
+
+    <p>
+      <%= add_child_link "New Telephone", e, :telephones, {:partial => 'entities/telephone'} %>
+    </p>
+
+    <h3>Addresses</h3>
+
+    <% e.fields_for :addresses do |addresses_form| %>
+      <%= render :partial => 'entities/address', :locals => { :f => addresses_form } %>
+    <% end %>
+
+    <p>
+      <%= add_child_link "New Address", e, :addresses, {:partial => 'entities/address'} %>
+    </p>
+
+    <h3>Emails</h3>
+
+    <% e.fields_for :emails do |emails_form| %>
+      <%= render :partial => 'entities/email', :locals => { :f => emails_form } %>
+    <% end %>
+
+    <p>
+      <%= add_child_link "New Email", e, :emails, {:partial => 'entities/email'} %>
+    </p>
+
+  <% end %>
+
+  <%= f.submit "Submit" %>
+
+<% end %>

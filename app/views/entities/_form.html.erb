@@ -1,0 +1,58 @@
+<% form_for(@entity) do |f| %>
+  <%= f.error_messages %>
+
+<p>
+  <%= f.label :entity_type_id, "Entity type" %>
+  <%= f.collection_select :entity_type_id, EntityType.all, :id, :description %>
+</p>
+
+<p>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %>
+</p>
+
+<p>
+  <%= f.label :homepage, "Homepage" %>
+  <%= f.text_field :homepage %>
+</p>
+
+<p>
+  <%= f.label :nif, "NIF" %>
+  <%= f.text_field :nif %>
+</p>
+
+<h2>Telephones</h2>
+
+  <% f.fields_for :telephones do |telephone_form| %>
+    <%= render :partial => 'telephone', :locals => { :f => telephone_form } %>
+  <% end %>
+
+<p>
+  <%= add_child_link "New Telephone", f, :telephones %>
+</p>
+
+<h2>Addresses</h2>
+
+<% f.fields_for :addresses do |addresses_form| %>
+    <%= render :partial => 'address', :locals => { :f => addresses_form } %>
+  <% end %>
+
+<p>
+  <%= add_child_link "New Address", f, :addresses %>
+</p>
+
+<h2>Emails</h2>
+
+  <% f.fields_for :emails do |emails_form| %>
+    <%= render :partial => 'email', :locals => { :f => emails_form } %>
+  <% end %>
+
+<p>
+  <%= add_child_link "New Email", f, :emails %>
+</p>
+
+  <p>
+    <%= f.submit 'Submit' %>
+  </p>
+<% end %>
+  
