@@ -1,0 +1,9 @@
+<ul>
+<% pages.each do |page| %>
+  <% if page.static? %>
+  <li><%= link_to page.name, static_path(page.permalink) %></li>
+  <% else %>
+  <li><%= link_to page.name, :controller => page.content %></li>
+  <% end %>
+<% end %>
+</ul>

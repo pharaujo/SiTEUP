@@ -15,6 +15,8 @@
       <%- if show_title? -%>
         <h1><%=h yield(:title) %></h1>
       <%- end -%>
+
+      <%= render :partial => "layouts/menu.html.erb", :locals => {:pages => Page.all} %>
       
       <%= yield %>
     </div>

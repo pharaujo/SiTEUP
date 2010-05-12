@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090914005449) do
+ActiveRecord::Schema.define(:version => 20100423002217) do
 
   create_table "addresses", :force => true do |t|
     t.string  "address",                :null => false
@@ -33,8 +33,6 @@ ActiveRecord::Schema.define(:version => 20090914005449) do
     t.integer "main_address"
   end
 
-  add_index "entities", ["nif"], :name => "entity_nif_key", :unique => true
-
   create_table "entity_types", :force => true do |t|
     t.string "description", :null => false
   end
@@ -48,8 +46,15 @@ ActiveRecord::Schema.define(:version => 20090914005449) do
     t.string  "marital_status",              :default => "S"
   end
 
-  add_index "members", ["nbi"], :name => "member_nbi_key", :unique => true
-  add_index "members", ["student_number"], :name => "member_student_number_key", :unique => true
+  create_table "pages", :force => true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.string   "permalink"
+    t.integer  "page_id_id"
+    t.boolean  "static"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "telephones", :force => true do |t|
     t.integer "telephone", :null => false
