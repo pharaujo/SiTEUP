@@ -26,13 +26,21 @@ class Entity < ActiveRecord::Base
 
   validate :validates_format_of_nif
 
-  private
+  # Override the 'all' method so it returns only entities, not members
+  # TODO: improve the condition so it can be more general
+  #
+  def self.all
+    super(:joins => :entity_type, :conditions => 
+      ["entity_types.description <> ? AND entity_types.description <> ?",
+        "Membro", "Member"])
+  end
+
   # TODO: translate the error messages below
+  #
+  private
   def validates_format_of_nif
-    # accepts nil values
     return if nif.nil?
 
-    # convert to a array of "ints"
     nif_tmp = nif.to_s.scan(/\d/).map {|i| i.to_i}
     unless nif_tmp.length == 9
       errors.add(:nif, "is invalid")
@@ -46,7 +54,6 @@ class Entity < ActiveRecord::Base
       return if check_digit == nif_tmp[8]
     end
 
-    # lulz. one-liners ftw...
     errors.add(:nif, "is invalid")
   end
 end

@@ -29,8 +29,7 @@
   <% f.fields_for :entity do |e| %>
 
     <p>
-      <%= e.label :entity_type_id, "Entity type" %>
-      <%= e.collection_select :entity_type_id, EntityType.all, :id, :description %>
+      <%= e.hidden_field :entity_type_id, :value => @entity_type_id %>
     </p>
 
     <p>
