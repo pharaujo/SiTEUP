@@ -2,6 +2,7 @@ class EntitiesController < ApplicationController
   # GET /entities
   def index
     @entities = Entity.all 
+    @entity_types = EntityType.except_members 
   end
 
   # GET /entities/1

@@ -1,4 +1,5 @@
 class EntityType < ActiveRecord::Base
+  has_many :entities
 
   # TODO: improve the condition so it can be more general
   #

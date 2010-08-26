@@ -3,16 +3,17 @@ class Member < ActiveRecord::Base
   belongs_to :entity, :dependent => :destroy
 
   accepts_nested_attributes_for :entity
+  # accepts_nested_attributes_for :user
 
   validates_presence_of :nickname
   validates_length_of :student_number, :maximum => 9
   validates_uniqueness_of :nbi, :allow_nil => true
 
-  # validate :validate_format_of_nbi
+  validate :validate_format_of_nbi
 
   private
   def validate_format_of_nbi
-    # TODO: validate the nbi (should be similar to the nif validation)
+    true # TODO: actually do some validation
   end
 
 end
