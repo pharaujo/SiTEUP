@@ -1,9 +1,10 @@
 class Member < ActiveRecord::Base
   # acts_as_tree :foreign_key => :godfather_id
   belongs_to :entity, :dependent => :destroy
+  has_one :user
 
   accepts_nested_attributes_for :entity
-  # accepts_nested_attributes_for :user
+  accepts_nested_attributes_for :user
 
   validates_presence_of :nickname
   validates_length_of :student_number, :maximum => 9

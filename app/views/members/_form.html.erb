@@ -22,10 +22,6 @@
   <%= f.text_field :nbi %>
 </p>
 
-<h2>
-  Entity info
-</h2>
-
   <% f.fields_for :entity do |e| %>
 
     <p>
@@ -76,6 +72,22 @@
     <p>
       <%= add_child_link "New Email", e, :emails, {:partial => 'entities/email'} %>
     </p>
+
+  <% end %>
+
+  <% f.fields_for :user do |u| %>
+  <p>
+    <%= u.label :username %><br />
+    <%= u.text_field :username %>
+  </p>
+  <p>
+    <%= u.label :password %><br />
+    <%= u.password_field :password %>
+  </p>
+  <p>
+    <%= u.label :password_confirmation %><br />
+    <%= u.password_field :password_confirmation %>
+  </p>
 
   <% end %>
 

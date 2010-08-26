@@ -11,7 +11,16 @@
   <body>
     <div class="container_12">
     <div class="grid_12 alpha omega">
-      <p id="title">This is the title bar and menu stuff!</p>
+      <div class="grid_10 alpha">
+        <p id="title">SiTEUP</p>
+      </div>
+      <div class="grid_2 omega">
+      <% if current_user %>
+        <%= link_to "Logout", logout_path %>
+      <% else %>
+        <%= link_to "Login", login_path %>
+      <% end %>
+      </div>
     </div>
     <div class="grid_2 alpha">
       <p>This is a sidebar!</p>

@@ -8,3 +8,5 @@ log/server.log
 log/development.log
 \.orig\..*$
 \.orig$
+\.swp$
+\.rb~$
