@@ -1,0 +1,25 @@
+one:
+  name: MyString
+  start_date: 
+  end_date: 
+  local: MyString
+  notes: MyText
+  revenue: 1.5
+  paid: false
+  confirmed: false
+  public: false
+  event_type: 
+  entity: 
+
+two:
+  name: MyString
+  start_date: 
+  end_date: 
+  local: MyString
+  notes: MyText
+  revenue: 1.5
+  paid: false
+  confirmed: false
+  public: false
+  event_type: 
+  entity: 

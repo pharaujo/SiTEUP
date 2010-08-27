@@ -24,4 +24,9 @@ module ApplicationHelper
       render(:partial => options[:partial], :locals => { options[:form_builder_local] => f })
     end
   end
+
+  def textilize(text)
+    RedCloth.new(text).to_html
+  end
+
 end
