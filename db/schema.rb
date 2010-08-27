@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100826214843) do
+ActiveRecord::Schema.define(:version => 20100827003358) do
 
   create_table "addresses", :force => true do |t|
     t.string  "address",                :null => false
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(:version => 20100826214843) do
 
   add_index "members", ["nbi"], :name => "member_nbi_key", :unique => true
   add_index "members", ["student_number"], :name => "member_student_number_key", :unique => true
+
+  create_table "posts", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "telephones", :force => true do |t|
     t.integer "telephone", :null => false

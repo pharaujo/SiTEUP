@@ -1,7 +1,9 @@
 <%- title("Listing members") -%>
+<% content_for :actions do |a| %>
+  <p><%= link_to 'New member', new_member_path %></p>
+<% end %>
 
 <table>
-
 <% @members.each do |member| %>
   <tr>
     <td><%= link_to 'Show', member %></td>
@@ -12,5 +14,3 @@
 </table>
 
 <br />
-
-<%= link_to 'New member', new_member_path %>

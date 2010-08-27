@@ -16,15 +16,20 @@
       </div>
       <div class="grid_2 omega">
       <% if current_user %>
+        <p>
+        (<%= current_user.member.nickname %>) 
         <%= link_to "Logout", logout_path %>
+        </p>
       <% else %>
+        <p>
         <%= link_to "Login", login_path %>
+        </p>
       <% end %>
       </div>
     </div>
     <div class="grid_2 alpha">
-      <p>This is a sidebar!</p>
-      <p>Where the actions will be!</p>
+      <p><strong>Actions</strong></p>
+      <%= yield(:actions) %>
     </div>
 
     <div class="grid_10 omega">
