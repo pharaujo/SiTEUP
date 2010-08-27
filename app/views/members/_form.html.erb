@@ -22,6 +22,11 @@
   <%= f.text_field :nbi %>
 </p>
 
+<p>
+  <%= f.label :programme_id, "Programme" %><br/>
+  <%= f.collection_select :programme_id, Programme.all, :id, :description %>
+</p>
+
   <% f.fields_for :entity do |e| %>
 
     <p>

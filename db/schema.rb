@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100827015704) do
+ActiveRecord::Schema.define(:version => 20100827025855) do
 
   create_table "addresses", :force => true do |t|
     t.string  "address",                :null => false
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20100827015704) do
     t.integer "godfather_id"
     t.integer "entity_id"
     t.string  "marital_status",              :default => "S"
+    t.integer "programme_id"
   end
 
   add_index "members", ["nbi"], :name => "member_nbi_key", :unique => true
@@ -77,6 +78,10 @@ ActiveRecord::Schema.define(:version => 20100827015704) do
     t.integer  "member_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "programmes", :force => true do |t|
+    t.string "description"
   end
 
   create_table "telephones", :force => true do |t|
