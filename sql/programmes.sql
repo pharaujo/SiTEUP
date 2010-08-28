@@ -1,0 +1,12 @@
+insert into programmes(description) values('Licenciatura em Ciência da Informação'); 
+insert into programmes(description) values('Licenciatura em Ciências da Comunicação: Jornalismo, Assessoria, Multimédia');
+insert into programmes(description) values('Licenciatura em Ciências de Engenharia - Engenharia de Minas e Geo-Ambiente');
+insert into programmes(description) values('Mestrado Integrado em Bioengenharia'); 
+insert into programmes(description) values('Mestrado Integrado em Engenharia Civil');
+insert into programmes(description) values('Mestrado Integrado em Engenharia do Ambiente');
+insert into programmes(description) values('Mestrado Integrado em Engenharia Electrotécnica e de Computadores');
+insert into programmes(description) values('Mestrado Integrado em Engenharia Industrial e Gestão');
+insert into programmes(description) values('Mestrado Integrado em Engenharia Informática e Computação');
+insert into programmes(description) values('Mestrado Integrado em Engenharia Mecânica');
+insert into programmes(description) values('Mestrado Integrado em Engenharia Metalúrgica e de Materiais');
+insert into programmes(description) values('Mestrado Integrado em Engenharia Química');

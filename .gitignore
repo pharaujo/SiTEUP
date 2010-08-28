@@ -7,5 +7,6 @@
 log/*.log
 db/schema.rb
 config/database.yml
+nbproject/
 *.swp
 *.rb~
