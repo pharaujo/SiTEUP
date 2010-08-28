@@ -8,43 +8,43 @@
 <%- end %>
 
 <p>
-  <%= f.label :nickname, "Nickname" %>
+  <%= f.label :nickname, "Nickname" %><br/>
   <%= f.text_field :nickname %>
 </p>
 
 <p>
-  <%= f.label :student_number, "Student number" %>
+  <%= f.label :student_number, "Student number" %><br/>
   <%= f.text_field :student_number %>
 </p>
 
 <p>
-  <%= f.label :nbi, "BI" %>
+  <%= f.label :nbi, "BI" %><br/>
   <%= f.text_field :nbi %>
 </p>
 
-<h2>
-  Entity info
-</h2>
+<p>
+  <%= f.label :programme_id, "Programme" %><br/>
+  <%= f.collection_select :programme_id, Programme.all, :id, :description %>
+</p>
 
   <% f.fields_for :entity do |e| %>
 
     <p>
-      <%= e.label :entity_type_id, "Entity type" %>
-      <%= e.collection_select :entity_type_id, EntityType.all, :id, :description %>
+      <%= e.hidden_field :entity_type_id, :value => @entity_type_id %>
     </p>
 
     <p>
-      <%= e.label :name, "Name" %>
+      <%= e.label :name, "Name" %><br/>
       <%= e.text_field :name %>
     </p>
 
     <p>
-      <%= e.label :homepage, "Homepage" %>
+      <%= e.label :homepage, "Homepage" %><br/>
       <%= e.text_field :homepage %>
     </p>
 
     <p>
-      <%= e.label :nif, "NIF" %>
+      <%= e.label :nif, "NIF" %><br/>
       <%= e.text_field :nif %>
     </p>
 
@@ -77,6 +77,22 @@
     <p>
       <%= add_child_link "New Email", e, :emails, {:partial => 'entities/email'} %>
     </p>
+
+  <% end %>
+
+  <% f.fields_for :user do |u| %>
+  <p>
+    <%= u.label :username %><br />
+    <%= u.text_field :username %>
+  </p>
+  <p>
+    <%= u.label :password %><br />
+    <%= u.password_field :password %>
+  </p>
+  <p>
+    <%= u.label :password_confirmation %><br />
+    <%= u.password_field :password_confirmation %>
+  </p>
 
   <% end %>
 

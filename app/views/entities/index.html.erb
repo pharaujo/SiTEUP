@@ -1,26 +1,17 @@
-<h1>Listing entities</h1>
+<%- title("Listing entities") -%>
 
-<table>
-  <tr>
-    <th>Type</th>
-    <th>Name</th>
-    <th>Homepage</th>
-    <th>NIF</th>
-  </tr>
+<% @entity_types.each do |entity_type| %>
+<h2><%= entity_type.description %></h2>
+<hr>
 
-<% @entities.each do |entity| %>
-  <tr>
-    <td><%= entity.entity_type.description %></td>
-    <td><%= entity.name %></td>
-    <td><%= entity.homepage %></td>
-    <td><%= entity.nif %></td>
-    <td><%= link_to 'Show', entity %></td>
-    <td><%= link_to 'Edit', edit_entity_path(entity) %></td>
-    <td><%= link_to 'Destroy', entity, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% entity_type.entities.each do |entity| %>
+<p><%= entity.name %></p>
+<p><%= entity.homepage %></p>
+<p><%= entity.nif %></p>
+<p><%= link_to 'Show', entity %>, <%= link_to 'Edit', edit_entity_path(entity) %>, <%= link_to 'Destroy', entity, :confirm => 'Are you sure?', :method => :delete %></p>
 <% end %>
-</table>
 
-<br />
+<% end %>
+
 
 <%= link_to 'New entity', new_entity_path %>

@@ -3,7 +3,7 @@
 
 <p>
   <%= f.label :entity_type_id, "Entity type" %>
-  <%= f.collection_select :entity_type_id, EntityType.all, :id, :description %>
+  <%= f.collection_select :entity_type_id, @entity_types, :id, :description %>
 </p>
 
 <p>

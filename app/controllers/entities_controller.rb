@@ -1,7 +1,8 @@
 class EntitiesController < ApplicationController
   # GET /entities
   def index
-    @entities = Entity.all
+    @entities = Entity.all 
+    @entity_types = EntityType.except_members 
   end
 
   # GET /entities/1
@@ -12,11 +13,13 @@ class EntitiesController < ApplicationController
   # GET /entities/new
   def new
     @entity = Entity.new
+    @entity_types = EntityType.except_members 
   end
 
   # GET /entities/1/edit
   def edit
     @entity = Entity.find(params[:id])
+    @entity_types = EntityType.except_members 
   end
 
   # POST /entities
@@ -27,6 +30,7 @@ class EntitiesController < ApplicationController
       flash[:notice] = 'Entity was successfully created.'
       redirect_to(@entity)
     else
+      @entity_types = EntityType.except_members 
       render :action => "new"
     end
   end
@@ -39,6 +43,7 @@ class EntitiesController < ApplicationController
       flash[:notice] = 'Entity was successfully updated.'
       redirect_to(@entity)
     else
+      @entity_types = EntityType.except_members 
       render :action => "edit"
     end
   end

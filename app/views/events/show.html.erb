@@ -1,0 +1,52 @@
+<% title "Event" %>
+
+<p>
+  <strong>Name:</strong>
+  <%=h @event.name %>
+</p>
+<p>
+  <strong>Start Date:</strong>
+  <%=h @event.start_date %>
+</p>
+<p>
+  <strong>End Date:</strong>
+  <%=h @event.end_date %>
+</p>
+<p>
+  <strong>Local:</strong>
+  <%=h @event.local %>
+</p>
+<p>
+  <strong>Notes:</strong>
+  <%=h @event.notes %>
+</p>
+<p>
+  <strong>Revenue:</strong>
+  <%=h @event.revenue %>
+</p>
+<p>
+  <strong>Paid:</strong>
+  <%=h @event.paid %>
+</p>
+<p>
+  <strong>Confirmed:</strong>
+  <%=h @event.confirmed %>
+</p>
+<p>
+  <strong>Public:</strong>
+  <%=h @event.public %>
+</p>
+<p>
+  <strong>Event Type:</strong>
+  <%=h @event.event_type %>
+</p>
+<p>
+  <strong>Entity:</strong>
+  <%=h @event.entity %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_event_path(@event) %> |
+  <%= link_to "Destroy", @event, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", events_path %>
+</p>

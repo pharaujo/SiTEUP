@@ -1,0 +1,12 @@
+h1. SiTEUP
+
+SiTEUP aims to be a customized information system for the 
+_Tuna de Engenharia da UP_, a portuguese student music group.
+
+Beyond member management, it provides event and member availability
+management to ease up the whole member tracking process.
+
+It also provides some social tools to connect with fans and 
+let them know of future events and such.
+
+It is a project still on its infancy.

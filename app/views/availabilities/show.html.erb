@@ -1,0 +1,18 @@
+<% title "Availability" %>
+
+<p>
+  <strong>Member:</strong>
+  <%=h @availability.member %>
+</p>
+<p>
+  <strong>Event:</strong>
+  <%=h @availability.event %>
+</p>
+<p>
+  <strong>Notes:</strong>
+  <%=h @availability.notes %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_availability_path(@availability) %> |
+</p>

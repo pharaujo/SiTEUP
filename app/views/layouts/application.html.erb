@@ -2,12 +2,37 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
   <head>
-    <title><%= h(yield(:title) || "Untitled") %></title>
+    <title><%= h(yield(:title) || "teup.pt") %></title>
+    <%= stylesheet_link_tag 'reset' %>
+    <%= stylesheet_link_tag 'grid' %>
     <%= stylesheet_link_tag 'application' %>
     <%= yield(:head) %>
   </head>
   <body>
-    <div id="container">
+    <div class="container_12">
+    <div class="grid_12 alpha omega">
+      <div class="grid_10 alpha">
+        <p id="title"><a href='/'>SiTEUP</a></p>
+      </div>
+      <div class="grid_2 omega">
+      <% if current_user %>
+        <p>
+        (<%= current_user.member.nickname %>) 
+        <%= link_to "Logout", logout_path %>
+        </p>
+      <% else %>
+        <p>
+        <%= link_to "Login", login_path %>
+        </p>
+      <% end %>
+      </div>
+    </div>
+    <div class="grid_2 alpha">
+      <p><strong>Actions</strong></p>
+      <%= yield(:actions) %>
+    </div>
+
+    <div class="grid_10 omega">
       <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <%- end -%>
@@ -19,6 +44,7 @@
       <%= render :partial => "layouts/menu.html.erb", :locals => {:pages => Page.all} %>
       
       <%= yield %>
+    </div>
     </div>
   </body>
 </html>

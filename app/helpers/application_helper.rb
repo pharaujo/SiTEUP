@@ -5,9 +5,10 @@
 
 # *Update* (14/09/09)
 # Using the options hash on add_child_link will fix the problem above.
+
 module ApplicationHelper
   def remove_child_link(name, f)
-    f.hidden_field(:_delete) + link_to_function(name, "remove_fields(this)")
+    f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)")
   end
 
   def add_child_link(name, f, method, options = {})
@@ -23,4 +24,9 @@ module ApplicationHelper
       render(:partial => options[:partial], :locals => { options[:form_builder_local] => f })
     end
   end
+
+  def textilize(text)
+    RedCloth.new(text).to_html
+  end
+
 end

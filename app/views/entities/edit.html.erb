@@ -2,10 +2,9 @@
 <%= javascript_include_tag :defaults -%>
 <%- end -%>
 
-<h1>Editing entity</h1>
+<%- title("Editing entity") -%>
 
 <%= render :partial => 'form' %>
 
 <%= link_to 'Show', @entity %> |
-<%= link_to 'Back', entities_path %> |
-<%= link_to 'Promote to member', new_member_path(:entity_id => @entity.id) %>
+<%= link_to 'Back', entities_path %>
