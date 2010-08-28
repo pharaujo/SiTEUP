@@ -1,0 +1,16 @@
+<% form_for @availability do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :event %><br />
+    <%= f.text_field :event %>
+  </p>
+  <p>
+    <%= f.label :notes %><br />
+    <%= f.text_area :notes %>
+  </p>
+  <p>
+    <%= f.label :go %><br />
+    <%= f.check_box :go %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

@@ -2,6 +2,7 @@ class Member < ActiveRecord::Base
   # acts_as_tree :foreign_key => :godfather_id
   belongs_to :entity, :dependent => :destroy
   has_many :posts
+  has_many :availabilities
   has_one :user
   has_one :programme
 
