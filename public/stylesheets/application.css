@@ -11,7 +11,7 @@ a {
 }
 
 div {
-  background-color: #EEE;
+  background-color: #f9f9f9;
 }
 
 #flash_notice, #flash_error {
@@ -71,3 +71,12 @@ div {
   list-style: disc;
 }
 
+#menu {
+  padding: 0;
+}
+
+#menu li {
+  list-style: none;
+  display: inline;
+  padding-right: 20px;
+}

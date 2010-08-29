@@ -1,4 +1,4 @@
-<ul>
+<ul id="menu">
 <% pages.each do |page| %>
   <% if page.static? %>
   <li><%= link_to page.name, static_path(page.permalink) %></li>

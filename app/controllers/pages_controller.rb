@@ -14,6 +14,10 @@ class PagesController < ApplicationController
     else
       @page = Page.find(params[:id])
     end
+
+    unless @page.static?
+      redirect_to static_path(@page.content)
+    end
   end
 
   # GET /pages/new
