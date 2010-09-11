@@ -1,0 +1,28 @@
+<% title "Promotion" %>
+
+<p>
+  <strong>Time:</strong>
+  <%=h @promotion.time %>
+</p>
+<p>
+  <strong>Order:</strong>
+  <%=h @promotion.order %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%=h @promotion.name %>
+</p>
+<p>
+  <strong>Member:</strong>
+  <%=h @promotion.member %>
+</p>
+<p>
+  <strong>Hierarchy:</strong>
+  <%=h @promotion.hierarchy %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_promotion_path(@promotion) %> |
+  <%= link_to "Destroy", @promotion, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", promotions_path %>
+</p>

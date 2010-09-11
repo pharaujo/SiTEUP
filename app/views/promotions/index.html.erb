@@ -1,0 +1,25 @@
+<% title "Promotions" %>
+
+<table>
+  <tr>
+    <th>Time</th>
+    <th>Order</th>
+    <th>Name</th>
+    <th>Member</th>
+    <th>Hierarchy</th>
+  </tr>
+  <% for promotion in @promotions %>
+    <tr>
+      <td><%=h promotion.time %></td>
+      <td><%=h promotion.order %></td>
+      <td><%=h promotion.name %></td>
+      <td><%=h promotion.member %></td>
+      <td><%=h promotion.hierarchy %></td>
+      <td><%= link_to "Show", promotion %></td>
+      <td><%= link_to "Edit", edit_promotion_path(promotion) %></td>
+      <td><%= link_to "Destroy", promotion, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Promotion", new_promotion_path %></p>

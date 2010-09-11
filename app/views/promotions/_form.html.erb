@@ -1,0 +1,24 @@
+<% form_for @promotion do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :time %><br />
+    <%= f.datetime_select :time %>
+  </p>
+  <p>
+    <%= f.label :order %><br />
+    <%= f.text_field :order %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :member %><br />
+    <%= f.text_field :member %>
+  </p>
+  <p>
+    <%= f.label :hierarchy %><br />
+    <%= f.text_field :hierarchy %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

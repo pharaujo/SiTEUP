@@ -3,6 +3,7 @@ class Member < ActiveRecord::Base
   belongs_to :entity, :dependent => :destroy
   has_many :posts
   has_many :availabilities
+  has_many :promotions
   has_one :user
   has_one :programme
 
