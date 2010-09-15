@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
   <head>
-    <title><%= h(yield(:title) || "teup.pt") %></title>
+    <title>teup.pt - <%= h(yield(:title)) %></title>
     <%= stylesheet_link_tag 'reset' %>
     <%= stylesheet_link_tag 'grid' %>
     <%= stylesheet_link_tag 'application' %>

@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
   def index
-    @members = Member.all
+    @hierarchies = Hierarchy.all
   end
 
   def show
