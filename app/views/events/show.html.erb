@@ -38,12 +38,18 @@
 </p>
 <p>
   <strong>Event Type:</strong>
-  <%=h @event.event_type %>
+  <%=h @event.event_type.description %>
 </p>
 <p>
   <strong>Entity:</strong>
-  <%=h @event.entity %>
+  <%=h @event.entity.name %>
 </p>
+
+<h2>Availabilities</h2>
+
+<% @event.availabilities.each do |a| %>
+
+<% end %>
 
 <p>
   <%= link_to "Edit", edit_event_path(@event) %> |

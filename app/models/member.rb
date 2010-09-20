@@ -4,6 +4,7 @@ class Member < ActiveRecord::Base
   has_many :posts
   has_many :availabilities
   has_many :promotions
+  has_many :last_promotions
   has_one :user
   has_one :programme
   has_one :role
@@ -20,6 +21,9 @@ class Member < ActiveRecord::Base
 
   validate :validate_format_of_nbi
 
+  named_scope :ordered, :include => :last_promotions,
+    :order => 'last_promotions.time ASC'
+
   # Alias for acts_as_tree's parent
   def godfather
     parent
@@ -28,7 +32,7 @@ class Member < ActiveRecord::Base
   # Initial promotion to the lowest hierarchy
   def initial_promotion
     p = Promotion.new
-    p.hierarchy = Hierarchy.first(:order => "position DESC")
+    p.hierarchy = Hierarchy.last
     p.member = self
 
     # FIXME: This will have to do by now
@@ -38,12 +42,7 @@ class Member < ActiveRecord::Base
 
   # Gets the current member's hierarchy
   def hierarchy
-    promotions.first(:order => "time DESC").hierarchy
-  end
-
-  # Gets the member's promotion history given an order
-  def ordered_promotions(order = "ASC")
-    promotions.all(:order => "time #{order}")
+    promotions.ordered.first.hierarchy
   end
 
   private

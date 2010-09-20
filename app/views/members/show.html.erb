@@ -1,12 +1,4 @@
 <p>Current hierarchy: <%= @member.hierarchy.description %></p>
 
-
-<h2>Hierarchy history</h2>
-<ul>
-<% @member.ordered_promotions("DESC").each do |p| %>
-  <li><%= p.hierarchy.description %></li>
-<% end %>
-</ul>
-
 <%= link_to 'Edit', edit_member_path(@member) %> |
 <%= link_to 'Back', members_path %>
