@@ -20,7 +20,6 @@ class Entity < ActiveRecord::Base
     :allow_destroy => true
 
   validates_presence_of :name, :entity_type
-  validates_numericality_of :nif, :only_integer => true, :greater_than => 0, :allow_nil => true
   validates_format_of :homepage, :with => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/
   validates_uniqueness_of :nif, :allow_nil => true
 
@@ -35,7 +34,7 @@ class Entity < ActiveRecord::Base
         "Membro", "Member"])
   end
 
-  # TODO: translate the error messages below
+  # TODO: i14e the error messages below
   #
   private
   def validates_format_of_nif

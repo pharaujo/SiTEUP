@@ -47,7 +47,9 @@
 
 <h2>Availabilities</h2>
 
-<% @event.availabilities.each do |a| %>
+<% @members.each do |m| %>
+
+<p><%= m.nickname %> - <%= m.available?(@event) %></p>
 
 <% end %>
 

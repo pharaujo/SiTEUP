@@ -5,6 +5,7 @@ class EventsController < ApplicationController
   
   def show
     @event = Event.find(params[:id])
+    @members = Member.active.ordered
   end
   
   def new
