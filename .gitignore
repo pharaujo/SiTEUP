@@ -9,4 +9,5 @@ db/schema.rb
 config/database.yml
 nbproject/
 *.swp
+*.swo
 *.rb~

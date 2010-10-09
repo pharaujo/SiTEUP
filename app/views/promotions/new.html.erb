@@ -1,5 +1,5 @@
 <% title "New Promotion" %>
 
-<%= render :partial => 'form' %>
+<%= render :partial => 'form', :locals => {:promotion => @promotion} %>
 
 <p><%= link_to "Back to List", promotions_path %></p>

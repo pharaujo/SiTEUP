@@ -1,16 +1,15 @@
-<%- title("A TEUP") -%>
+<%- title("A Tuna actualmente") -%>
 <% content_for :actions do |a| %>
-  <p><%= link_to 'New member', new_member_path %></p>
+  <p><%= link_to 'Criar membro', new_member_path %></p>
 <% end %>
 
 <% @hierarchies.each do |h| %>
   <h2><%=h h.description.pluralize %></h2>
 
-  <% break if h.description == "Aprendiz" %>
-
   <ul>
   <% h.ordered_members.each do |m| %>
-    <li><%=h m.nickname %></li>
+    <li><a href="<%= member_path(m) %>"><%=h m.nickname %></a></li>
   <% end %>
   </ul>
+
 <% end %>

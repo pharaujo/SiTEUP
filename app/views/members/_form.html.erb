@@ -1,73 +1,120 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "tabber" -%>
+<% end %>
+
 <% form_for(@member) do |f| %>
   <%= f.error_messages %>
 
-<%- unless @member.entity.new_record? %>
-<p>
-  <%= f.hidden_field :entity_id %>
-</p>
-<%- end %>
+<p id="description">Campos marcados com um <span style="color: red;">*</span> são obrigatórios.</p>
 
-<p>
-  <%= f.label :nickname, "Nickname" %><br/>
-  <%= f.text_field :nickname %>
-</p>
+<div class="tabber">
+        
+  <div class="tabbertab">
 
-<p>
-  <%= f.label :student_number, "Student number" %><br/>
-  <%= f.text_field :student_number %>
-</p>
-
-<p>
-  <%= f.label :nbi, "BI" %><br/>
-  <%= f.text_field :nbi %>
-</p>
-
-<p>
-  <%= f.label :programme_id, "Programme" %><br/>
-  <%= f.collection_select :programme_id, Programme.all, :id, :description %>
-</p>
-
-  <% f.fields_for :entity do |e| %>
-
+    <h3>Informação Pessoal</h3>
+        
     <p>
-      <%= e.hidden_field :entity_type_id, :value => @entity_type_id %>
+    <span style="color: red;">*</span>
+    <%= f.label :nickname, "Alcunha" %><br/>
+    <%= f.text_field :nickname %>
+    </p>
+  
+    <p>
+    <span style="color: red;">*</span>
+    <%= f.label :student_number, "N.º de Aluno" %> <br/>
+    <%= f.text_field :student_number %>
+    </p>
+  
+    <p>
+    <%= f.label :nbi, "N.º de Bilhete de Identidade" %><br/>
+    <%= f.text_field :nbi %>
+    </p>
+  
+    <p>
+    <%= f.label :programme_id, "Curso" %><br/>
+    <%= f.collection_select :programme_id, Programme.all, :id, :description, {:prompt => 'Seleccionar curso'} %>
+    </p>
+  
+    <% f.fields_for :entity do |e| %>
+  
+    <p>
+    <%= e.hidden_field :entity_type_id, :value => @entity_type_id %>
+    </p>
+  
+    <p>
+    <span style="color: red;">*</span>
+    <%= e.label :name, "Nome próprio" %> <br/>
+    <%= e.text_field :name %>
+    </p>
+  
+    <p>
+    <%= e.label :homepage, "Página pessoal" %><br/>
+    <%= e.text_field :homepage %>
+    </p>
+  
+    <p>
+    <%= e.label :nif, "Número de Identificação Fiscal" %><br/>
+    <%= e.text_field :nif %>
+    </p>
+  
+    <% end %>
+  
+    <% f.fields_for :user do |u| %>
+    <p>
+    <span style="color: red;">*</span>
+    <%= u.label :username, "Nome de utilizador" %> <br />
+    <%= u.text_field :username %>
     </p>
 
     <p>
-      <%= e.label :name, "Name" %><br/>
-      <%= e.text_field :name %>
+    <span style="color: red;">*</span>
+    <%= u.label :password, "Palavra passe" %> <br />
+    <%= u.password_field :password %>
     </p>
 
     <p>
-      <%= e.label :homepage, "Homepage" %><br/>
-      <%= e.text_field :homepage %>
+    <span style="color: red;">*</span>
+    <%= u.label :password_confirmation, "Confirmação da palavra passe" %><br />
+    <%= u.password_field :password_confirmation %>
     </p>
+  
+    <% end %>
 
-    <p>
-      <%= e.label :nif, "NIF" %><br/>
-      <%= e.text_field :nif %>
-    </p>
+  <%= f.submit "Guardar" %>
+  
+  </div>
 
-    <h3>Telephones</h3>
+  <div class="tabbertab">
+    <% f.fields_for :entity do |e| %>
+    <h3>Telefones</h3>
 
     <% e.fields_for :telephones do |telephone_form| %>
       <%= render :partial => 'entities/telephone', :locals => { :f => telephone_form } %>
     <% end %>
 
     <p>
-      <%= add_child_link "New Telephone", e, :telephones, {:partial => 'entities/telephone'} %>
+      <%= add_child_link "Novo telefone", e, :telephones, {:partial => 'entities/telephone'} %>
     </p>
 
-    <h3>Addresses</h3>
+  <%= f.submit "Guardar" %>
+  </div>
+
+  <div class="tabbertab">
+    <h3>Moradas</h3>
 
     <% e.fields_for :addresses do |addresses_form| %>
       <%= render :partial => 'entities/address', :locals => { :f => addresses_form } %>
     <% end %>
 
     <p>
-      <%= add_child_link "New Address", e, :addresses, {:partial => 'entities/address'} %>
+      <%= add_child_link "Nova morada", e, :addresses, {:partial => 'entities/address'} %>
     </p>
 
+  <%= f.submit "Guardar" %>
+    
+  </div>
+
+  <div class="tabbertab">
     <h3>Emails</h3>
 
     <% e.fields_for :emails do |emails_form| %>
@@ -75,27 +122,30 @@
     <% end %>
 
     <p>
-      <%= add_child_link "New Email", e, :emails, {:partial => 'entities/email'} %>
+      <%= add_child_link "Novo Email", e, :emails, {:partial => 'entities/email'} %>
     </p>
-
   <% end %>
 
-  <% f.fields_for :user do |u| %>
-  <p>
-    <%= u.label :username %><br />
-    <%= u.text_field :username %>
-  </p>
-  <p>
-    <%= u.label :password %><br />
-    <%= u.password_field :password %>
-  </p>
-  <p>
-    <%= u.label :password_confirmation %><br />
-    <%= u.password_field :password_confirmation %>
-  </p>
+  <%= f.submit "Guardar" %>
 
-  <% end %>
-
-  <%= f.submit "Submit" %>
+  </div>
 
 <% end %>
+
+<% unless @member.new_record?  %>
+  <div class="tabbertab">
+    <h3>Hierarquia</h3>
+    <%= render :partial => "promotions/form.html.erb", :locals => {:promotion => @promotion, :member => @member}  %>
+
+    <% @member.promotions.each do |p| %>
+      <p><%= p.time %></p>
+    <% end %>
+  </div>
+
+  <div class="tabbertab">
+    <h3>Cargos</h3>
+          
+  </div>
+<% end  %>
+
+</div>

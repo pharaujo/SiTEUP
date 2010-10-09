@@ -8,7 +8,7 @@ class Hierarchy < ActiveRecord::Base
   default_scope :order => 'position ASC'
 
   def ordered_members
-    members.all(:order => "last_promotions.time DESC")
+    members.all(:order => "last_promotions.time ASC")
   end
 
 end

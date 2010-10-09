@@ -3,6 +3,7 @@
 
 // I owe a litre of beer to @rbates for the following 2 functions
 // -- Stripteasus Explosivus
+
 function insert_fields(link, method, content) {
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + method, "g")
@@ -19,3 +20,7 @@ function remove_fields(link) {
   $(link).up(".fields").hide();
 }
 
+function add_weird_character(elementid, character){
+  $(elementid).value = $(elementid).value + character;
+  $(elementid).focus();
+}

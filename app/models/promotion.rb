@@ -1,8 +1,9 @@
 class Promotion < ActiveRecord::Base
-  attr_accessible :time, :order, :name, :member, :hierarchy
-
   belongs_to :member
   belongs_to :hierarchy
+
+  validates_presence_of :member_id
+  validates_presence_of :hierarchy_id
 
   named_scope :ordered, :order => 'time DESC'
 

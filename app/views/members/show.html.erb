@@ -1,4 +1,9 @@
-<p>Current hierarchy: <%= @member.hierarchy.description %></p>
+<% title(@member.nickname)  %>
+<% content_for :actions do |a| %>
+  <p><%= link_to 'Editar membro', edit_member_path(@member) %></p>
+  <p><%= link_to 'Back', members_path %></p>
+<% end %>
 
-<%= link_to 'Edit', edit_member_path(@member) %> |
-<%= link_to 'Back', members_path %>
+<p>Current hierarchy: <%= @member.hierarchy.description %></p>
+<p>Last promotion time: <%= @member.last_promotion.time %></p>
+

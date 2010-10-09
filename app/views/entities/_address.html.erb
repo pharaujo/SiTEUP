@@ -1,21 +1,21 @@
 <div class="fields">
   <p>
     <!-- See application_helper.rb for some nasty shit. -->
-    <%= f.label(:address, "Postal address") %>
-    <%= f.text_field :address %>
+    <%= f.label(:address, "Morada postal") %><br/>
+    <%= f.text_area :address %>
   </p>
 
   <p>
-    <%= f.label(:zipcode, "Zip code") %>
+    <%= f.label(:zipcode, "Código postal") %><br/>
     <%= f.text_field :zipcode %>
   </p>
 
   <p>
-    <%= f.label(:city, "City/Place") %>
+    <%= f.label(:city, "Localidade") %><br/>
     <%= f.text_field :city %>
   </p>
 
   <p>
-    <%= remove_child_link "remove", f %>
+    <%= remove_child_link "remover", f %>
   </p>
 </div>

@@ -27,7 +27,7 @@
         <%= link_to "Logout", logout_path %>
         </p>
       <% else %>
-        <%= render :partial => 'layouts/login.html.erb' %>
+        <%= render :partial => 'layouts/login.html.erb', :locals => {:user_session => UserSession.new} %>
       <% end %>
       </div>
 

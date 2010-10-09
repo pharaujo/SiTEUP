@@ -1,24 +1,17 @@
-<% form_for @promotion do |f| %>
+<% form_for promotion do |f| %>
   <%= f.error_messages %>
+    <%= f.hidden_field :member_id, :value => member.id %>
   <p>
-    <%= f.label :time %><br />
+    <%= f.label :time, "Data da subida" %> <span style="color: red;">*</span><br />
     <%= f.datetime_select :time %>
   </p>
   <p>
-    <%= f.label :order %><br />
-    <%= f.text_field :order %>
+    <%= f.label :name, "Nome ganho na subida" %><br />
+    <%= f.text_field :name, {:id => 'hierarchical_name'} %> <%= link_to_function "&aelig;", "add_weird_character(hierarchical_name, \"æ\")" %>
   </p>
   <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label :hierarchy_id, "Hierarquia" %> <span style="color: red;">*</span><br />
+    <%= f.collection_select :hierarchy_id, Hierarchy.all, :id, :description %>
   </p>
-  <p>
-    <%= f.label :member %><br />
-    <%= f.text_field :member %>
-  </p>
-  <p>
-    <%= f.label :hierarchy %><br />
-    <%= f.text_field :hierarchy %>
-  </p>
-  <p><%= f.submit %></p>
+  <p><%= f.submit "Promover" %></p>
 <% end %>

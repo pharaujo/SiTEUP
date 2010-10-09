@@ -1,12 +1,12 @@
-<% form_for UserSession.new do |f| %>
+<% form_for user_session do |f| %>
   <%= f.error_messages %>
   <p>
     <%= f.label :username %><br />
-    <%= f.text_field :username %>
+    <%= f.text_field :username, :size => 0 %>
   </p>
   <p>
     <%= f.label :password %><br />
-    <%= f.password_field :password %>
+    <%= f.password_field :password, :size => 0 %>
   </p>
   <p><%= f.submit "Login" %></p>
 <% end %>
