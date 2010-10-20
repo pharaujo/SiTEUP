@@ -1,4 +1,5 @@
 <% content_for :head do %>
+  <%= formtastic_stylesheet_link_tag %>
   <%= javascript_include_tag "tabber" -%>
 <% end %>
 
@@ -132,10 +133,18 @@
 
 <% end %>
 
-<% unless @member.new_record?  %>
+<% unless @member.new_record? %>
   <div class="tabbertab">
     <h3>Hierarquia</h3>
-    <%= render :partial => "promotions/form.html.erb", :locals => {:promotion => @promotion, :member => @member}  %>
+    <% semantic_form_for @promotion do |f|  %>
+      <% f.inputs "New promotion" do %>
+        <%= f.input :name %>
+        <%= f.input :time %>
+        <%= f.input :hierarchy %>
+        <%= f.input :member, :as => :hidden, :value => @member.id %>
+      <% end  %>
+      <%= f.buttons %>
+    <% end %>
 
     <% @member.promotions.each do |p| %>
       <p><%= p.time %></p>
@@ -144,7 +153,7 @@
 
   <div class="tabbertab">
     <h3>Cargos</h3>
-          
+
   </div>
 <% end  %>
 
