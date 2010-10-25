@@ -139,14 +139,14 @@
     <% semantic_form_for @promotion do |f|  %>
       <% f.inputs "New promotion" do %>
         <%= f.input :name %>
-        <%= f.input :time %>
-        <%= f.input :hierarchy %>
-        <%= f.input :member, :as => :hidden, :value => @member.id %>
+        <%= f.input :time, :as => :datepicker %>
+        <%= f.input :hierarchy, :as => :select, :label_method => :description, :value_method => :id %>
+        <%= f.input :member_id, :as => :hidden, :value => @member.id %>
       <% end  %>
       <%= f.buttons %>
     <% end %>
 
-    <% @member.promotions.each do |p| %>
+    <% @member.promotions.ordered.each do |p| %>
       <p><%= p.time %></p>
     <% end %>
   </div>

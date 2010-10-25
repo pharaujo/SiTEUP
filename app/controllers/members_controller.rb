@@ -16,7 +16,10 @@ class MembersController < ApplicationController
 
   def edit
     @member = Member.find(params[:id])
+    
     @promotion = Promotion.new
+    @promotion.time = Time.now #Default value
+
     @hierarchies = Hierarchy.all
     @entity_type_id = EntityType.only_member.id
   end

@@ -10,4 +10,5 @@ class Promotion < ActiveRecord::Base
   def current
     ordered.first
   end
+
 end

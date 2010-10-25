@@ -1082,7 +1082,8 @@ jQuery(function($){
 		showMonthAfterYear: false,
 		yearSuffix: ''};
 	$.datepicker.setDefaults($.datepicker.regional['uk']);
-});﻿/* Vietnamese initialisation for the jQuery UI date picker plugin. */
+});
+/* Vietnamese initialisation for the jQuery UI date picker plugin. */
 /* Translated by Le Thanh Huy (lthanhhuy@cit.ctu.edu.vn). */
 jQuery(function($){
 	$.datepicker.regional['vi'] = {
@@ -1151,7 +1152,7 @@ jQuery(function($){
 		yearSuffix: '年'};
 	$.datepicker.setDefaults($.datepicker.regional['zh-HK']);
 });
-﻿/* Chinese initialisation for the jQuery UI date picker plugin. */
+/* Chinese initialisation for the jQuery UI date picker plugin. */
 /* Written by Ressol (ressol@gmail.com). */
 jQuery(function($){
 	$.datepicker.regional['zh-TW'] = {

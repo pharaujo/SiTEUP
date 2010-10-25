@@ -38,7 +38,7 @@ class Member < ActiveRecord::Base
     p.hierarchy = Hierarchy.last
     p.member = self
 
-    # FIXME: This will have to do by now
+    # FIXME: This will have to make do by now
     p.time = Time.now
     p.save
   end

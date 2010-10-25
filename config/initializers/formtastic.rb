@@ -1,8 +1,8 @@
 # Set the default text field size when input is a string. Default is 50.
-# Formtastic::SemanticFormBuilder.default_text_field_size = 50
+Formtastic::SemanticFormBuilder.default_text_field_size = 50
 
 # Set the default text area height when input is a text. Default is 20.
-# Formtastic::SemanticFormBuilder.default_text_area_height = 5
+Formtastic::SemanticFormBuilder.default_text_area_height = 5
 
 # Should all fields be considered "required" by default?
 # Rails 2 only, ignored by Rails 3 because it will never fall back to this default.
@@ -53,3 +53,23 @@
 # You can add custom inputs or override parts of Formtastic by subclassing SemanticFormBuilder and
 # specifying that class here.  Defaults to SemanticFormBuilder.
 # Formtastic::SemanticFormHelper.builder = MyCustomBuilder
+
+
+module Formtastic
+  module DatePicker
+    protected
+
+    def datepicker_input(method, options = {})
+      format = options[:format] || ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS[:default] || '%d %b %Y'
+      string_input(method, datepicker_options(format, object.send(method)).merge(options))
+    end
+
+    # Generate html input options for the datepicker_input
+    #
+    def datepicker_options(format, value = nil)
+      datepicker_options = {:value => value.try(:strftime, format), :input_html => {:class => 'ui-datepicker'}}
+    end
+  end
+end
+
+Formtastic::SemanticFormBuilder.send(:include, Formtastic::DatePicker)

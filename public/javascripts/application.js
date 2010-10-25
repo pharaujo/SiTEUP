@@ -1,8 +1,10 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+$(document).ready(function(){
+  $('input.ui-datepicker').datepicker();
+	$.datepicker.setDefaults($.datepicker.regional['']);
+});
 
-// I owe a litre of beer to @rbates for the following 2 functions
-// -- Stripteasus Explosivus
+
+// Add and remove fields function for the nested forms.
 
 function remove_fields(link) {
   $(link).prev("input[type=hidden]").val("1");
@@ -14,6 +16,8 @@ function insert_fields(link, association, content) {
   var regexp = new RegExp("new_" + association, "g")
   $(link).parent().before(content.replace(regexp, new_id));
 }
+
+// Add weird characters to aid the input of weird names.
 
 function add_weird_character(elementid, character){
   $(elementid).value = $(elementid).value + character;
