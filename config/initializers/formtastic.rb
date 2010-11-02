@@ -70,6 +70,22 @@ module Formtastic
       datepicker_options = {:value => value.try(:strftime, format), :input_html => {:class => 'ui-datepicker'}}
     end
   end
+
+  module DateTimePicker
+    protected
+
+    def datetimepicker_input(method, options = {})
+      format = options[:format] || ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS[:default] || '%d %b %Y'
+      string_input(method, datetimepicker_options(format, object.send(method)).merge(options))
+    end
+
+    # Generate html input options for the datetimepicker_input
+    #
+    def datetimepicker_options(format, value = nil)
+      datetimepicker_options = {:value => value.try(:strftime, format), :input_html => {:class => 'ui-datetimepicker'}}
+    end
+  end
 end
 
 Formtastic::SemanticFormBuilder.send(:include, Formtastic::DatePicker)
+Formtastic::SemanticFormBuilder.send(:include, Formtastic::DateTimePicker)

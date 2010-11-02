@@ -1,9 +1,11 @@
 <% title(@member.nickname)  %>
 <% content_for :actions do |a| %>
+  <% if can? :update, Member %>
   <p><%= link_to 'Editar membro', edit_member_path(@member) %></p>
+  <% end %>
+
   <p><%= link_to 'Back', members_path %></p>
 <% end %>
 
 <p>Current hierarchy: <%= @member.hierarchy.description %></p>
 <p>Last promotion time: <%= @member.last_promotion.time %></p>
-

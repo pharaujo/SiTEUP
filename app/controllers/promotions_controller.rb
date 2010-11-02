@@ -1,4 +1,6 @@
 class PromotionsController < ApplicationController
+  load_and_authorize_resource
+
   def create
     @promotion = Promotion.new(params[:promotion])
     if @promotion.save

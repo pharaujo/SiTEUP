@@ -1,30 +1,29 @@
 class EntitiesController < ApplicationController
+  load_and_authorize_resource
+
   # GET /entities
   def index
-    @entities = Entity.all 
+    authorize! :manage, Entity
     @entity_types = EntityType.except_members 
   end
 
   # GET /entities/1
   def show
-    @entity = Entity.find(params[:id])
+    authorize! :manage, Entity
   end
 
   # GET /entities/new
   def new
-    @entity = Entity.new
     @entity_types = EntityType.except_members 
   end
 
   # GET /entities/1/edit
   def edit
-    @entity = Entity.find(params[:id])
     @entity_types = EntityType.except_members 
   end
 
   # POST /entities
   def create
-    @entity = Entity.new(params[:entity])
 
     if @entity.save
       flash[:notice] = 'Entity was successfully created.'
@@ -37,7 +36,6 @@ class EntitiesController < ApplicationController
 
   # PUT /entities/1
   def update
-    @entity = Entity.find(params[:id])
 
     if @entity.update_attributes(params[:entity])
       flash[:notice] = 'Entity was successfully updated.'
@@ -50,7 +48,6 @@ class EntitiesController < ApplicationController
 
   # DELETE /entities/1
   def destroy
-    @entity = Entity.find(params[:id])
     @entity.destroy
 
     redirect_to(entities_url)

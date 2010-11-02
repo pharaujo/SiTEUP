@@ -1,6 +1,7 @@
 <% content_for :head do %>
   <%= formtastic_stylesheet_link_tag %>
   <%= javascript_include_tag "tabber" -%>
+  <%= javascript_include_tag "jquery-ui-timepicker-addon" -%>
 <% end %>
 
 <% form_for(@member) do |f| %>
@@ -15,13 +16,11 @@
     <h3>Informação Pessoal</h3>
         
     <p>
-    <span style="color: red;">*</span>
     <%= f.label :nickname, "Alcunha" %><br/>
     <%= f.text_field :nickname %>
     </p>
   
     <p>
-    <span style="color: red;">*</span>
     <%= f.label :student_number, "N.º de Aluno" %> <br/>
     <%= f.text_field :student_number %>
     </p>
@@ -43,7 +42,6 @@
     </p>
   
     <p>
-    <span style="color: red;">*</span>
     <%= e.label :name, "Nome próprio" %> <br/>
     <%= e.text_field :name %>
     </p>
@@ -62,23 +60,32 @@
   
     <% f.fields_for :user do |u| %>
     <p>
-    <span style="color: red;">*</span>
     <%= u.label :username, "Nome de utilizador" %> <br />
     <%= u.text_field :username %>
     </p>
 
     <p>
-    <span style="color: red;">*</span>
     <%= u.label :password, "Palavra passe" %> <br />
     <%= u.password_field :password %>
     </p>
 
     <p>
-    <span style="color: red;">*</span>
     <%= u.label :password_confirmation, "Confirmação da palavra passe" %><br />
     <%= u.password_field :password_confirmation %>
     </p>
-  
+
+
+    <% if current_user.role? :admin  %>
+    <p>
+    <%= u.label :roles, "Permissões" %><br />
+
+    <% for role in User::ROLES %>
+    <%= check_box_tag "member[user_attributes][roles][]", role, @member.user.roles.include?(role), {:id => 'member_user_attributes_roles_' + role} %> <%=h role.humanize %><br />
+    <% end %>
+
+    <%= hidden_field_tag "member[user_attributes][roles][]", "" %>
+    </p>
+    <% end %>
     <% end %>
 
   <%= f.submit "Guardar" %>
@@ -134,13 +141,16 @@
 <% end %>
 
 <% unless @member.new_record? %>
+
+  <% if can? :manage, Promotion  %>
   <div class="tabbertab">
     <h3>Hierarquia</h3>
     <% semantic_form_for @promotion do |f|  %>
-      <% f.inputs "New promotion" do %>
-        <%= f.input :name %>
-        <%= f.input :time, :as => :datepicker %>
-        <%= f.input :hierarchy, :as => :select, :label_method => :description, :value_method => :id %>
+      <% f.inputs "Nova hierarquia" do %>
+        <%= f.input :name, :label => "Nome" %>
+        <%= f.input :time, :as => :datetimepicker, :label => "Data" %>
+        <%= f.input :hierarchy, :as => :select, :label_method => :description, :value_method => :id, 
+          :label => "Hierarquia" %>
         <%= f.input :member_id, :as => :hidden, :value => @member.id %>
       <% end  %>
       <%= f.buttons %>
@@ -150,11 +160,22 @@
       <p><%= p.time %></p>
     <% end %>
   </div>
+  <% end %>
 
+  <% if can? :manage, Role  %>
   <div class="tabbertab">
     <h3>Cargos</h3>
-
+    <% semantic_form_for @role do |f|  %>
+      <% f.inputs "Novo cargo" do %>
+        <%= f.input :name, :as => :select, :collection => Role::NAMES, :label_method => :humanize, :label => "Descrição" %>
+        <%= f.input :start_date, :as => :datetimepicker, :label => "Data de início" %>
+        <%= f.input :end_date, :as => :datetimepicker, :label => "Data de final" %>
+        <%= f.input :member_id, :as => :hidden, :value => @member.id %>
+      <% end %>
+      <%= f.buttons %>
+    <% end %>
   </div>
+  <% end %>
 <% end  %>
 
 </div>

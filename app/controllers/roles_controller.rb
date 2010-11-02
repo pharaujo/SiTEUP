@@ -1,4 +1,6 @@
 class RolesController < ApplicationController
+  load_and_authorize_resources
+
   def index
     @roles = Role.all
   end

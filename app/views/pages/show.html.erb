@@ -1,6 +1,9 @@
 <% title(@page.name) %>
 
-<%= textilize @page.content %>
+<% if can? :update, Page %>
+  <%- content_for :actions  do -%>
+  <%= link_to 'Editar página', edit_page_path(@page) %> |
+  <% end %>
+<%- end -%>
 
-<%= link_to 'Edit', edit_page_path(@page) %> |
-<%= link_to 'Back', pages_path %>
+<%= textilize @page.content %>

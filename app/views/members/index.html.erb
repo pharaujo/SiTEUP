@@ -1,6 +1,9 @@
 <%- title("A Tuna actualmente") -%>
-<% content_for :actions do |a| %>
+
+<% if can? :create, :member %>
+  <% content_for :actions do |a| %>
   <p><%= link_to 'Criar membro', new_member_path %></p>
+  <% end %>
 <% end %>
 
 <% @hierarchies.each do |h| %>

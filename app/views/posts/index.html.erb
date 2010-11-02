@@ -1,22 +1,17 @@
 <% title "Posts" %>
-<% content_for :actions do %>
+<% if can? :create, Post %>
+  <% content_for :actions do %>
   <p><%= link_to "New Post", new_post_path %></p>
+  <% end %>
 <% end %>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Body</th>
-    <th>Member</th>
-  </tr>
-  <% for post in @posts %>
-    <tr>
-      <td><%=h post.title %></td>
-      <td><%=h post.body %></td>
-      <td><%=h post.member.nickname %></td>
-      <td><%= link_to "Show", post %></td>
-      <td><%= link_to "Edit", edit_post_path(post) %></td>
-      <td><%= link_to "Destroy", post, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
+<% for post in @posts %>
+  <h1><a href="<%= post_path(post) %>"><%= post.title %></a></h1>
+  <p>By <%=h post.member.nickname %> at <%= post.created_at %></p>
+  <%=textilize post.body %>
+  
+  <% if can? :manage, Post %>
+  <%= link_to "Edit", edit_post_path(post) %>
+  <%= link_to "Destroy", post, :confirm => 'Are you sure?', :method => :delete %>
   <% end %>
-</table>
+<% end %>

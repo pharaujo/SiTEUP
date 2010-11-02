@@ -5,11 +5,11 @@ class Member < ActiveRecord::Base
   has_many :posts
   has_many :availabilities
   has_many :promotions
+  has_many :roles
 
   has_one :last_promotion
   has_one :user
   has_one :programme
-  has_one :role
 
   after_create :initial_promotion
 
@@ -56,6 +56,11 @@ class Member < ActiveRecord::Base
   # Returns member's availability for a certain event
   def availability(event)
     availabilities.first(event)
+  end
+
+  # combines into an array the organization roles
+  def roles_array
+    roles.map {|r| r.name}
   end
 
   private

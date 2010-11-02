@@ -1,28 +1,11 @@
-<h1>Editing page</h1>
+<%- content_for(:head) do -%>
+  <%= javascript_include_tag :defaults -%>
+<%- end -%>
 
-<% form_for(@page) do |f| %>
-  <%= f.error_messages %>
+<%- content_for :actions  do -%>
+  <p><%= link_to 'Ver página', @page %></p>
+  <p><%= link_to 'Voltar', pages_path %></p>
+<%- end -%>
 
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :content %><br />
-    <%= f.text_area :content %>
-  </p>
-  <p>
-    <%= f.label :permalink %><br />
-    <%= f.text_field :permalink %>
-  </p>
-  <p>
-    <%= f.label :static %><br />
-    <%= f.check_box :static %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @page %> |
-<%= link_to 'Back', pages_path %>
+<%- title("Editar página") -%>
+<%= render :partial => 'form' %>

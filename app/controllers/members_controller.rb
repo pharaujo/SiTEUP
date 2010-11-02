@@ -1,10 +1,11 @@
 class MembersController < ApplicationController
+  load_and_authorize_resource
+
   def index
     @hierarchies = Hierarchy.all
   end
 
   def show
-    @member = Member.find(params[:id])
   end
 
   def new
@@ -15,18 +16,17 @@ class MembersController < ApplicationController
   end
 
   def edit
-    @member = Member.find(params[:id])
-    
     @promotion = Promotion.new
-    @promotion.time = Time.now #Default value
+    @promotion.time = Time.now # Default value
+
+    @role = Role.new
+    @role.start_date = Time.now # Default value
 
     @hierarchies = Hierarchy.all
     @entity_type_id = EntityType.only_member.id
   end
 
   def create
-    @member = Member.new(params[:member])
-
     if @member.save
       flash[:notice] = 'Member was successfully created.'
       redirect_to(@member)

@@ -1,6 +1,6 @@
 $(document).ready(function(){
-  $('input.ui-datepicker').datepicker();
-	$.datepicker.setDefaults($.datepicker.regional['']);
+  $('input.ui-datetimepicker').datetimepicker();
+	$.datepicker.setDefaults($.datepicker.regional['pt-BR']);
 });
 
 

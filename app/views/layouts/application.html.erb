@@ -32,10 +32,12 @@
       <% end %>
       </div>
 
+      <% if yield(:actions) %>
       <div id="actions">
         <p><strong>Acções</strong></p>
         <%= yield(:actions) %>
       </div>
+      <% end %>
     </div>
 
     <div class="grid_10 omega">
