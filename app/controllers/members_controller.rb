@@ -3,6 +3,8 @@ class MembersController < ApplicationController
 
   def index
     @hierarchies = Hierarchy.all
+    @magister = Member.with_role("magister").first
+    @ensaiador = Member.with_role("ensaiador").first
   end
 
   def show

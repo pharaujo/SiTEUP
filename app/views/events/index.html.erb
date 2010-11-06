@@ -1,37 +1,19 @@
-<% title "Events" %>
+<% title "Calendário" %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Start Date</th>
-    <th>End Date</th>
-    <th>Local</th>
-    <th>Notes</th>
-    <th>Revenue</th>
-    <th>Paid</th>
-    <th>Confirmed</th>
-    <th>Public</th>
-    <th>Event Type</th>
-    <th>Entity</th>
-  </tr>
-  <% for event in @events %>
-    <tr>
-      <td><%=h event.name %></td>
-      <td><%=h event.start_date %></td>
-      <td><%=h event.end_date %></td>
-      <td><%=h event.local %></td>
-      <td><%=h event.notes %></td>
-      <td><%=h event.revenue %></td>
-      <td><%=h event.paid %></td>
-      <td><%=h event.confirmed %></td>
-      <td><%=h event.public %></td>
-      <td><%=h event.event_type %></td>
-      <td><%=h event.entity %></td>
-      <td><%= link_to "Show", event %></td>
-      <td><%= link_to "Edit", edit_event_path(event) %></td>
-      <td><%= link_to "Destroy", event, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
+<% if can? :create, Event %>
+  <% content_for :actions do |a| %>
+  <p><%= link_to 'Criar evento', new_event_path %></p>
   <% end %>
-</table>
+<% end %>
 
-<p><%= link_to "New Event", new_event_path %></p>
+<% @grouped_events.each do |date, events| %>
+<h2><%= Event::MONTHS[date[0]-1] %> <%= date[1] %></h2>
+  <% events.group_by{|e| e.start_date.day}.each do |day, day_events| %>
+  <h3>Dia <%= day %></h3>
+  <ul>
+    <% day_events.sort{|a,b| a.start_date.hour <=> b.start_date.hour }.each do |e| %>
+      <li><%= e.start_date.strftime('%H:%m') %> <a href="<%= event_path(e) %>"><%= e.name %></a></li>
+    <% end %>
+  </ul>
+  <% end %>
+<% end %>

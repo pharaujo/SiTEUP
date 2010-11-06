@@ -1,9 +1,23 @@
 <%- title("A Tuna actualmente") -%>
 
-<% if can? :create, :member %>
+<% if can? :create, Member %>
   <% content_for :actions do |a| %>
   <p><%= link_to 'Criar membro', new_member_path %></p>
   <% end %>
+<% end %>
+
+<% unless @magister.nil?  %>
+  <h2>Magister</h2>
+  <ul>
+    <li><a href="<%= member_path(@magister) %>"><%=h @magister.nickname %></a></li>
+  </ul>
+<% end %>
+
+<% unless @ensaiador.nil? %>
+  <h2>Ensaiador</h2>
+  <ul>
+    <li><a href="<%= member_path(@ensaiador) %>"><%=h @ensaiador.nickname %></a></li>
+  </ul>
 <% end %>
 
 <% @hierarchies.each do |h| %>

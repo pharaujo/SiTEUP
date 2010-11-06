@@ -1,10 +1,10 @@
 class AvailabilitiesController < ApplicationController
+  load_and_authorize_resource
+
   def new
-    @availability = Availability.new
   end
   
   def create
-    @availability = Availability.new(params[:availability])
     if @availability.save
       flash[:notice] = "Successfully created availability."
       redirect_to @availability
@@ -14,11 +14,9 @@ class AvailabilitiesController < ApplicationController
   end
   
   def edit
-    @availability = Availability.find(params[:id])
   end
   
   def update
-    @availability = Availability.find(params[:id])
     if @availability.update_attributes(params[:availability])
       flash[:notice] = "Successfully updated availability."
       redirect_to @availability
@@ -28,6 +26,5 @@ class AvailabilitiesController < ApplicationController
   end
   
   def show
-    @availability = Availability.find(params[:id])
   end
 end

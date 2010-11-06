@@ -24,8 +24,8 @@ class Member < ActiveRecord::Base
   validate :validate_format_of_nbi
 
   named_scope :active, :conditions => {:active => true}
-  named_scope :ordered, :include => :last_promotion,
-    :order => 'last_promotions.time ASC'
+  named_scope :ordered, :include => :last_promotion, :order => 'last_promotions.time ASC'
+  named_scope :with_role, lambda { |role| {:conditions => "roles.name = '#{role}' AND roles.end_date IS NULL", :include => :roles} }
 
   # Alias for acts_as_tree's parent
   def godfather

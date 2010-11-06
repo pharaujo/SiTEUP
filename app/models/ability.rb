@@ -19,12 +19,27 @@ class Ability
       can :manage, [Entity, Member, Promotion, Role]
     end
 
+    # A scheduler may fiddle with events
+    if user.role? :scheduler
+      can :manage, [Event]
+    end
+
+    # A member may manage his own availabilities
+    can :manage, Availability do |availability|
+      availability.member.user == user
+    end
+
+    # The magister and ensaiador may manage availabilities
+    if user.role? :magister or user.role? :ensaiador
+      can :manage, [Availability]
+    end
+
     # A member may manage his own profile to a certain extent
     can :update, Member do |member|
       member.user == user
     end
 
-    # Guest users may read everything, for now
-    can :read, :all
+    # Guest users may read some stuff
+    can :read, [Post, Page, Member, Event]
   end
 end

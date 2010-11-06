@@ -1,4 +1,16 @@
-<% title "Event" %>
+<% title @event.name %>
+
+<% content_for :actions do |a| %>
+
+<% if can? :update, Event %>
+<p><%= link_to "Editar evento", edit_event_path(@event) %> 
+<% end %>
+<% if can? :destroy, Event %>
+<p><%= link_to "Apagar evento", @event, :confirm => 'Confere?', :method => :delete %> 
+<% end %>
+
+<p><%= link_to "Voltar atrás", events_path %>
+<% end %>
 
 <p>
   <strong>Name:</strong>
@@ -36,25 +48,8 @@
   <strong>Public:</strong>
   <%=h @event.public %>
 </p>
-<p>
-  <strong>Event Type:</strong>
-  <%=h @event.event_type.description %>
-</p>
-<p>
-  <strong>Entity:</strong>
-  <%=h @event.entity.name %>
-</p>
 
+<% if can? :manage, Availability %>
 <h2>Availabilities</h2>
-
-<% @members.each do |m| %>
-
-<p><%= m.nickname %> - <%= m.available?(@event) %></p>
-
 <% end %>
 
-<p>
-  <%= link_to "Edit", edit_event_path(@event) %> |
-  <%= link_to "Destroy", @event, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", events_path %>
-</p>

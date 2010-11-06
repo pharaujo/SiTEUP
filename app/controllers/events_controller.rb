@@ -1,19 +1,18 @@
 class EventsController < ApplicationController
+  load_and_authorize_resource
+
   def index
-    @events = Event.all
+    @grouped_events = @events.group_by {|e| [e.start_date.mon, e.start_date.year] }.sort
   end
   
   def show
-    @event = Event.find(params[:id])
     @members = Member.active.ordered
   end
   
   def new
-    @event = Event.new
   end
   
   def create
-    @event = Event.new(params[:event])
     if @event.save
       flash[:notice] = "Successfully created event."
       redirect_to @event
@@ -23,11 +22,9 @@ class EventsController < ApplicationController
   end
   
   def edit
-    @event = Event.find(params[:id])
   end
   
   def update
-    @event = Event.find(params[:id])
     if @event.update_attributes(params[:event])
       flash[:notice] = "Successfully updated event."
       redirect_to @event
@@ -37,7 +34,6 @@ class EventsController < ApplicationController
   end
   
   def destroy
-    @event = Event.find(params[:id])
     @event.destroy
     flash[:notice] = "Successfully destroyed event."
     redirect_to events_url
