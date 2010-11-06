@@ -9,9 +9,4 @@
   <h1><a href="<%= post_path(post) %>"><%= post.title %></a></h1>
   <p>By <%=h post.member.nickname %> at <%= post.created_at %></p>
   <%=textilize post.body %>
-  
-  <% if can? :manage, Post %>
-  <%= link_to "Edit", edit_post_path(post) %>
-  <%= link_to "Destroy", post, :confirm => 'Are you sure?', :method => :delete %>
-  <% end %>
 <% end %>

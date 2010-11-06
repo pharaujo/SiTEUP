@@ -1,5 +1,9 @@
 <% title @event.name %>
 
+<% content_for :head do %>
+  <%= formtastic_stylesheet_link_tag %>
+<% end %>
+
 <% content_for :actions do |a| %>
 
 <% if can? :update, Event %>
@@ -28,14 +32,21 @@
   <strong>Local:</strong>
   <%=h @event.local %>
 </p>
+
+<% unless @event.notes.empty?  %>
 <p>
   <strong>Notes:</strong>
   <%=h @event.notes %>
 </p>
+<% end %>
+
+<% unless @event.revenue.nil?  %>
 <p>
   <strong>Revenue:</strong>
   <%=h @event.revenue %>
 </p>
+<% end %>
+
 <p>
   <strong>Paid:</strong>
   <%=h @event.paid %>
@@ -50,6 +61,30 @@
 </p>
 
 <% if can? :manage, Availability %>
-<h2>Availabilities</h2>
+<h2>Minha disponibilidade</h2>
+  <% if @availability.nil? %>
+    <% semantic_form_for Availability.new do |f|  %>
+    <%= f.input :go, :as => :radio %>
+    <%= f.input :notes %>
+    <%= f.input :member_id, :as => :hidden, :value => current_user.member.id %>
+    <%= f.input :event_id, :as => :hidden, :value => @event.id%>
+    <%= f.commit_button %>
+    <% end %>
+  <% else %>
+    <p>Disponível: <%= @availability.go ? "<span style='color:green;'>Sim</span>" : "<span style='color:red;'>Não</span>" %></p>
+    <% unless @availability.notes.empty? %>
+    <p>Notas: <%= @availability.notes %></p>
+    <% end %>
+  <% end %>
 <% end %>
 
+<% unless (current_user.try(:roles) & %w[admin magister ensaiador]).empty?%>
+  <h2>Disponibilidades</h2>
+  <% if @event.availabilities.empty? %>
+    <p>Ninguém assinou esta disponibilidade, ainda!</p>
+  <% else %>
+    <% @event.availabilities.each do |a| %>
+    <p><%= a.member.nickname %>: <%= a.go ? "<span style='color:green;'>Sim</span>" : "<span style='color:red;'>Não</span>" %></p>
+  <% end %>
+  <% end %>
+<% end %>

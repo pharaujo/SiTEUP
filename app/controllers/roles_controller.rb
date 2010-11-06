@@ -17,9 +17,7 @@ class RolesController < ApplicationController
     @role = Role.new(params[:role])
     if @role.save
       flash[:notice] = "Successfully created role."
-      redirect_to @role
-    else
-      render :action => 'new'
+      redirect_to edit_member_path(@role.member)
     end
   end
   

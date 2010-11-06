@@ -7,9 +7,7 @@ class AvailabilitiesController < ApplicationController
   def create
     if @availability.save
       flash[:notice] = "Successfully created availability."
-      redirect_to @availability
-    else
-      render :action => 'new'
+      redirect_to @availability.event
     end
   end
   

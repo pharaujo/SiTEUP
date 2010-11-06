@@ -7,6 +7,7 @@ class EventsController < ApplicationController
   
   def show
     @members = Member.active.ordered
+    @availability = Availability.first(:conditions => ["member_id = ? AND event_id = ?", current_user.member.id, @event.id])
   end
   
   def new
