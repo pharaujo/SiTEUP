@@ -21,7 +21,7 @@ class Ability
 
     # A scheduler may fiddle with events
     if user.role? :scheduler
-      can :manage, [Event]
+      can :manage, [Event, EventType]
     end
 
     # A member may manage his own availabilities

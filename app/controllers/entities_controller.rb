@@ -5,6 +5,14 @@ class EntitiesController < ApplicationController
   def index
     authorize! :manage, Entity
     @entity_types = EntityType.except_members 
+
+    respond_to do |format|
+      format.html
+      format.json do 
+        @filtered_entities = Entity.find(:all, :conditions => ['name ILIKE ?', "%#{params[:term]}%"])
+        render :json => @filtered_entities.map {|e| { :label => e.name,  :category => e.entity_type.description}}
+      end
+    end
   end
 
   # GET /entities/1

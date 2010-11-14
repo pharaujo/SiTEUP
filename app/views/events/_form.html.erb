@@ -1,48 +1,45 @@
-<% form_for @event do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :start_date %><br />
-    <%= f.datetime_select :start_date %>
-  </p>
-  <p>
-    <%= f.label :end_date %><br />
-    <%= f.datetime_select :end_date %>
-  </p>
-  <p>
-    <%= f.label :local %><br />
-    <%= f.text_field :local %>
-  </p>
-  <p>
-    <%= f.label :notes %><br />
-    <%= f.text_area :notes %>
-  </p>
-  <p>
-    <%= f.label :revenue %><br />
-    <%= f.text_field :revenue %>
-  </p>
-  <p>
-    <%= f.label :paid %><br />
-    <%= f.check_box :paid %>
-  </p>
-  <p>
-    <%= f.label :confirmed %><br />
-    <%= f.check_box :confirmed %>
-  </p>
-  <p>
-    <%= f.label :public %><br />
-    <%= f.check_box :public %>
-  </p>
-  <p>
-    <%= f.label :event_type_id, "Event type" %>
-    <%= f.collection_select :event_type_id, EventType.all, :id, :description %>
-  </p>
-  <p>
-    <%= f.label :entity_id %><br />
-    <%= f.collection_select :entity_id, Entity.all, :id, :name %>
-  </p>
-  <p><%= f.submit %></p>
+<% content_for :head do %>
+  <%= javascript_include_tag "jquery-ui-timepicker-addon" %>
 <% end %>
+
+<% semantic_form_for @event do |f| %>
+  <% f.inputs do  %>
+    <%= f.input :name %>
+    <%= f.input :start_date, :as => :datepicker %>
+    <%= f.input :end_date, :as => :datepicker, :hint => 'Leave blank if this is a one day event.' %>
+    <%= f.input :local, :hint => 'Try to make it as google mappy as possible!' %>
+    <%= f.input :notes %>
+    <%= f.input :revenue %>
+    <%= f.input :paid %>
+    <%= f.input :confirmed %>
+    <%= f.input :public %>
+    <%= f.input :event_type_id, :as => :string %>
+    <%= f.input :entity_id, :as => :string %>
+  <% end %>
+  <% f.buttons do %>
+    <%= f.submit %>
+  <% end %>
+<% end %>
+
+<script>
+  // initialize all the auto-completers
+  $( "#event_event_type_id" ).autocomplete({minLength: 0, delay: 0, source: "/event_types.json"});
+  $( "#event_entity_id" ).catcomplete({minLength: 0, delay: 0, source: "/entities.json"});
+
+  // initialize the start and end date helpers
+  var dates = $( "#event_start_date, #event_end_date" ).datepicker({
+    defaultDate: "+1w",
+    showOtherMonths: true,
+    selectOtherMonths: true,
+    showButtonPanel: true,
+    onSelect: function( selectedDate ) {
+      var option = this.id == "event_start_date" ? "minDate" : "maxDate",
+        instance = $( this ).data( "datepicker" );
+        date = $.datepicker.parseDate(
+          instance.settings.dateFormat ||
+          $.datepicker._defaults.dateFormat,
+          selectedDate, instance.settings );
+    dates.not( this ).datepicker( "option", option, date );
+    }
+  });
+</script>

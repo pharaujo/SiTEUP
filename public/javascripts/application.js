@@ -1,6 +1,26 @@
 $(document).ready(function(){
-  $('input.ui-datetimepicker').datetimepicker();
+  // initialize all the datepickers
 	$.datepicker.setDefaults($.datepicker.regional['pt-BR']);
+
+  //$('input.ui-datetimepicker').datetimepicker();
+  $('input.ui-datepicker').datepicker({defaultDate: "+1w"});
+});
+
+
+// Custom widget for a categorized auto-complete
+
+$.widget( "custom.catcomplete", $.ui.autocomplete, {
+	_renderMenu: function( ul, items ) {
+		var self = this,
+			currentCategory = "";
+		$.each( items, function( index, item ) {
+			if ( item.category != currentCategory ) {
+				ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+				currentCategory = item.category;
+			}
+			self._renderItem( ul, item );
+		});
+	}
 });
 
 

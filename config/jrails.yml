@@ -9,8 +9,8 @@
 #  jqueryui_version: "1.8.4"
 
 development:
-  google: true
-  compressed: true
+  google: false
+  compressed: false
 
 production:
   google: true
