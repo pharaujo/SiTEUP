@@ -10,7 +10,7 @@ class EntitiesController < ApplicationController
       format.html
       format.json do 
         @filtered_entities = Entity.find(:all, :conditions => ['name ILIKE ?', "%#{params[:term]}%"])
-        render :json => @filtered_entities.map {|e| { :label => e.name,  :category => e.entity_type.description}}
+        render :json => @filtered_entities.map {|e| { :id => e.id, :label => e.name, :category => e.entity_type.description}}
       end
     end
   end
